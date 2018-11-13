@@ -1,36 +1,8 @@
 \chapter{Conceito do Sistema}
 \label{chap:concep}
 
-\begin{flushright}
+A percepção do ELIR pode ser definida como um sistema de sensoriamento integrado com unidades de processamento para disponibilizar os dados com maior confiabilidade e  transparência ao operador final. O sistema foi projetado de forma a possuir três subsistemas principais: segurança, georreferenciamento e detecção. A descrição de cada um dos subsistemas e suas funcionalidades serão mostradas nas próximas sessões.
 
-   \begin{list}{}{
-      \setlength{\leftmargin}{4.5cm}
-      \setlength{\rightmargin}{0cm}
-      \setlength{\labelwidth}{0pt}
-      \setlength{\labelsep}{\leftmargin}}
-      \item Quanto maior for a rapidez de transformação de uma
-      sociedade, mais temporárias são as necessidades
-      individuais. Essas flutuaçõess tornam ainda mais acelerado
-      o senso de turbilh da sociedade.
-
-      \begin{list}{}{
-      \setlength{\leftmargin}{0cm}
-      \setlength{\rightmargin}{0cm}
-      \setlength{\labelwidth}{0pt}
-      \setlength{\labelsep}{\leftmargin}}
-      \item (Alvin Toffler)
-      \end{list}
-   \end{list}
-\end{flushright}
-
-\begin{flushright}
-  Quanto maior for a rapidez de transformação de uma \\
-  sociedade, mais temporárias são as necessidades \\
-  individuais. Essas flutuações tornam ainda mais \\
-  acelerado o senso de turbilhão da sociedade. \\
-  \ \\
-  (Alvin Toffler)
-\end{flushright}
 
 %--------- NEW SECTION ----------------------
 %\section{Estudo do estado da arte}
@@ -76,7 +48,7 @@ Na arquitetura geral deste sistema, mostrado na Fig. \ref{arqgeral}, estão repr
 \caption{Arquitetura Geral da Perception}\label{arqgeral}
 \end{figure}
 
- A etapa de Sensing é composta por todos os processos de aquisição de dados de todos os sensores envolvidos no projeto. A camada de interface compreende a disponibilização destes dados para o ambiente de trabalho ROS. Essas duas etapas são camadas de 0000000000hardware. Por último, terá a camada de software, a qual será feita no ROS Enviroment, e que irá englobar todo o sistema de compreensão e interpretação dos dados provenientes do sistema de interfaceamento do robô.
+ A etapa de Sensing é composta por todos os processos de aquisição de dados de todos os sensores envolvidos no projeto. A camada de interface compreende a disponibilização destes dados para o ambiente de trabalho ROS. Essas duas etapas são camadas de hardware. Por último, terá a camada de software, a qual será feita no ROS Enviroment, e que irá englobar todo o sistema de compreensão e interpretação dos dados provenientes do sistema de interfaceamento do robô.
  
 \subsection{Arquitetura de software}
 
@@ -113,7 +85,7 @@ A camada de business layer é responsável por implementar a regra de negócio d
 
 A camada de User Interface foi projetada para facilitar a interação com o usuário final. Ela tem o objetivo de disponibilizar de forma simplificada os dados mais relevantes do robô. Nesta camada existem três subcamadas: Robot Status Display, Actuators Display e Video Display. A subcamada Robot Status Display disponibiliza os dados de integridade do robô como temperatura, corrente, tensão, nível de bateria, entre outras informações. A subcamada de Actuators Display, disponibiliza o dados de todos os motores do robô, como carga, temperatura, status e corrente, desta forma o usuário pode acompanhar o desenvolvimento de todas as suas atividades. Por último, a subcamada de Video Display mostra em tempo real o monitoramento realizado pela câmera infravermelho e estéreo possibilitando o usuário de ver os componentes da linha que estão com temperatura elevada e até mesmo identificar pontos quentes, assim como verificar a imagem no plano RGB.
 
-A interface irá se resumir em duas telas: A tela principal com um layout de dashboard, e outra que será as informações dos atuadores. O dashboard será um painel de monitoramento, no qual haverá as informações mais importantes da missão, como pode ser visto na Fig. \ref{UI} no apêndice D. Essa tela, além de monstrar as informações, irá pode dar o comando de início e parada da missão a partir dos botões "Start" e "Stop". A tela dos atuadores irá mostrar de forma organizada, as informações que foram mencionadas, além da corrente total de cada HUB de motores. Pode-se observar a tela de atuadores na Fig. \ref{UI2} no apêndice D.
+A interface irá se resumir em duas telas: A tela principal com um layout de dashboard, e outra que será as informações dos atuadores. O dashboard será um painel de monitoramento, no qual haverá as informações mais importantes da missão, como pode ser visto na Fig. \ref{UI} no apêndice D. Essa tela, além de monstrar as informações, irá pode dar o comando de início e parada da missão a partir dos botões "Start" e "Stop". A tela dos atuadores irá mostrar de forma organizada, as informações que foram mencionadas, além da corrente total de cada HUB de motores. Pode-se observar a tela de atuadores na Fig. \ref{UI2} no apêndice C.
 
 \label{ssec:arqs}
 
@@ -122,7 +94,7 @@ A interface irá se resumir em duas telas: A tela principal com um layout de das
 %\label{sec:qfd}
 %asdfsdafsf
 
-\subsection{Requisitos técnicos}
-\label{ssec:reqt}
-asdfsadfdsf
+%\subsection{Requisitos técnicos}
+%\label{ssec:reqt}
+%asdfsadfdsf
 

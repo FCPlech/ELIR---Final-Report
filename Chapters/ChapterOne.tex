@@ -1,7 +1,12 @@
 \chapter{Introdução}
 \label{chap:intro}
 
-O mundo \'e - e sempre foi - um mundo de rede. Todavia apenas nas \'ultimas duas d\'ecadas a teoria de redes tornou-se um t\'opico que atraido aten\c{c}\~ao de pesquisadores e da m\'idia (refletida nos trabalhos de \cite{Barabasi2003-1}, \cite{Watts2003}, \cite{NBW2006}), especialmente em rela\c{c}\~ao \`as redes sociais: os relacionamentos entre os terroristas do 11/9, a forma como a SARS se espalhou em 2002/03 e o mito dos "6 graus de separa\c{c}\~ao" entre dois indiv\'iduos. At\'e mesmo a forma como a obesidade se espalha pode ser explicada atrav\'es da an\'alise de redes. O aumento da popularidade dos sites de rede social como Facebook, Google+ ou LinkedIn (ou a Plataforma Lattes brasileira) aumenta a nossa percep\c{c}\~ao de rede formada por nossos amigos, colegas e fam\'ilia e isso constitui a base invis\'ivel de nossa vida social.
+\citeonline{mamede2005} diz que as linhas de transmissão são elementos de um sistema elétrico que transportam a energia produzida pelas fontes de geração até as subestações abaixadoras instaladas próximas aos grandes centros de carga. Como as fontes de geração
+de energia são construídas longes dos centros consumidores é preciso de linhas de transmissão de grandes extensões, o que as tornam susceptíveis às incidências de defeitos.
+
+Um dos maiores problemas na distribuição de energia é o aquecimento anormal associado à alta resistência ou fluxo de corrente excessiva, onde alguns dos componentes afetados são o transformador trifásico, switches, conetores, fusíveis, cabos, etc \cite{canahuire}.
+
+Para detectar esses problemas, é necessário a utilização de câmeras térmicas para estimação da temperatura dos componentes. 
 
 %--------- NEW SECTION ----------------------
 \section{Objetivos}
@@ -34,17 +39,25 @@ O objetivo deste trabalho é descrever os procedimentos realizados para constru�
 \section{Justificativa}
 \label{sec:justi}
 
-O pesquisador/estudante deve apresentar os aspectos mais
-relevantes da pesquisa ressaltando os impactos (e.g. cient\'ifico,
-tecnol\'ogico, econ\^omico, social e ambiental) que a pesquisa
-causar\'a. Deve-se ter cuidado com a ingenuidade no momento em que
-os argumentos forem apresentados.
+A garantia da disponibilidade de energia elétrica é um dos maiores problemas enfrentados pelas concessionárias de energia elétrica do país, pois além do custo elevado, a manutenção das linhas de transmissão é uma tarefa de alto risco para atividade humana. Atualmente, a inspeção é realizada a partir de aeronoves tripuladas ou com técnicos que apoiados a linha executam as tarefas com uma vestimenta especial com proteção para a indução.
+
+A fim de reduzir o trabalho humano em atividades de risco muitos alternativas utilizando a robótica e o monitoramente térmico estão sendo utilizadas atualmente. O ELIR (Electrical Line Inspection Robot) foi idealizado para suprir a necessidade de segurança nas atividades de manutenção de linhas de alta tensão. Ele é um robô autônomo, que realiza o monitoramento de pontos quentes na linha a partir de imagem térmica, desta forma consiste em uma solução de manuntenção preditiva sem apresentar riscos a integridade física de funcionários.
+
+O ELIR além de uma solução tecnológica é um trabalho acadêmico composto por estudantes de graduação, mestrado e doutorado da instituição. O desenvolvimento do protótipo para a instituição promove a atuação dos estudantes em robótica capacitando-os para a atuação na aŕea e cumprindo um dos principais objetivos da instituição que é o fomento a pesquisa e desenvolvimento. 
 
 %--------- NEW SECTION ----------------------
 \section{Requisitos do cliente}
 \label{sec:reqc}
-asjdflkasjdlfjsdlk;f
-
+O desenvolvimento do sistema de percepção para o robô ELIR teve como fundamento os requisitos técnicos proposto pelo cliente do projeto. A descrição dos requisitos está mostrada abaixo:
+    \subsection{Inspeção de Temperatura dos cabos, da estrutura e dos obstáculos} 
+    Devem ser disponibilizadas as informações de medição de temperatura dos cabos, da estrutura da linha e de seus obstáculos. Esses dados devem ser obtidos através da câmera térmica para inspeção.    \subsection{Georreferenciamento dos eventos}
+    Todos os eventos de detecção de pontos quentes, eventos de sobretemperatura e sobrecorrente devem ser sinalizados no arquivo de log informando a data, horário e localização através dos dados de latitude e longitude obtidos pelo GPS.
+    \subsection{Disponibilizar vídeo dos eventos} 
+    A inspeção realizada pela câmera térmica deve ser disponibilizada em tempo real na interface gráfica do robô.
+    \subsection{Identificação de Posicionamento da garra no cabo} 
+    A fim de garantir a confiabilidade da operação deve ser realizado um sensoriamento com o objetivo de verificar se as garras do robô estão devidamente amparadas no cabo da linha de alta tensão.
+    \subsection{Inspeção de Linhas de Servidão}  
+    Devem ser disponibilizadas informações de objetivos até 7m abaixo do robô
 %--------- NEW SECTION ----------------------
 \section{Organização do \thetypework}
 \label{section:organizacao}
@@ -55,9 +68,12 @@ Este documento apresenta $x$ capítulos e está estruturado da seguinte forma:
 
   \item \textbf{Capítulo \ref{chap:intro} - Introdução}: Contextualiza o âmbito, no qual a pesquisa proposta está inserida. Apresenta, portanto, a definição do problema, objetivos e justificativas da pesquisa e como este \thetypeworkthree está estruturado;
 
-  \item \textbf{Capítulo \ref{chap:concep} - Nome do capítulo}: XXX;
-
-
+  \item \textbf{Capítulo \ref{chap:concep} - Conceito do Sistema}: Descreve como o sistema de Percepção é composto, apresenta a especificação técnica, a arquitetura geral do sistema, a arquitetura de software e os requisitos técnicos.;
+  
+  \item \textbf{Capítulo \ref{chap:mat} - Materiais e Métodos}: Apresenta os materiais utilizados no projeto, explica os suportes mecânicos criados, o diagrama elétrico e o desenho de placa desenvolvidos, apresenta as especificações de cada funcionalidade do sistema;
+  
+  \item \textbf{Capítulo \ref{chap:result} - Resultados}: Apresenta descrição dos testes unitários e integrados realizados;
+ 
   \item \textbf{Capítulo \ref{chap:conc} - Conclusão}: Apresenta as conclusóes, contribuições
   e algumas sugestões de atividades de pesquisa a serem desenvolvidas no futuro.
 
