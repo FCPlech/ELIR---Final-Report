@@ -1,0 +1,69 @@
+\chapter{Resultados}
+\label{chap:result}
+asdfdsfdsf
+
+%--------- NEW SECTION ----------------------
+\section{Testes unitários}
+\label{sec:testu}
+
+    \subsection{Câmera Infra-Vermelho}
+    
+    A câmera IR trabalha com comunicação SPI. Por isso, foi necessário um driver para converter os dados da câmera e disponibilizá-los em uma porta USB. Foi utilizada a placa de interface Nucleo STM32F401RE e o driver da câmera disponibilizado no site da mbed. A USB da placa foi conectada no computador e foi criado um código em python para printar as informações adquiridas na porta serial do computador e saber diferenciar os frames. 
+    
+    
+    \subsection{Sonar EZ-1}
+    O sonar EZ-1 da MaxBotix possui saída analógica, desta forma para cada distância medida existe um valor de tensão associado no pino AN do sonar. Para testar o sensor de proximidade foi utilizada uma das portas analógicas da Phidgets que possui um pino de VCC, um de GND e um pino Analógico. Com o driver da phidgets instalado no computador e funcionando foi necessário apenas conectar os pinos de VCC, GND E AN do sensor nos pinos correspondentes da Phidgets e compilar um código para leitura de tensão - disponibilizado no próprio site da Phidgets - no terminal do computador. 
+    
+    Ao compilar o código você recebe no intervalo de 10s todas as leituras de tensão efetuadas no sensor. Notamos que ao afastar o obstáculo do sonar o valor de tensão aumentava e quando aproximavamos o obstáculo o valor de tensão diminuia, indicando a linearidade do sensor e validando o seu funcionamento.
+    
+    \subsection{Sensor de Proximidade}
+    O sensor de proximidade possui um LED vermelho em sua estrutura, toda vez que o sensor identifica a presença de algum objetivo o LED ascende. Por isso, o sensor foi alimentado através de uma fonte de tensão ajustada para 5V e o LED foi observado. Ao colocar um objeto na frente do sensor a luz ascendia e ao retirar o objeto a luz apagava, indicando o pleno funcionamento do sensor.
+    
+    \subsection{Sensor de corrente}
+    
+    O sensor de corrente da Phidgets consegue ler valores entre -30 a +30 com resolução de 75mA. Por isso para testar do sensor era necessário uma fonte de corrente com valor maior que 75mA. O circuito utilizado para fornecer essa corrente foi um LED de alto brilho com um resistor de potência em série. A corrente estimada foi de 100mA. Para testar o funcionamento do sensor este precisava ter seus dois canais de entrada conectados em série no circuito e a saída do mesmo foi conectado na porta analógica da Phidgets. A partir do script VoltageInput anteriormente mencionado, foi possível obter os dados de corrente da leitura do sensor. Os dados obtidos foram compatíveis com os valores de corrente real confirmando o funcionamento do sensor. 
+    
+
+    \subsection{Smart Charger}
+    
+    A placa de gerenciamento e carregamento das baterias funciona a partir do protocolo de comunicação SMBus, este protocolo é baseado no protocolo i2c. As informações de tempertatura, tensão, carga entre outras possuem uma codificação. Por isso para comunicar com a placa você precisa escrever uma mensagem para ela contendo o endereço da bateria que você quer ler a informação, o código da informação que você quer ler e entrar com o endereço de memória no qual a informação será escrita.
+    
+    Foi implementado um código na placa de interface Nucleo STM32L432 para receber as informações provenientes da Smart Charger e disponibiliza-la na USB da placa. Foram lidos os dados de temperatura, carga e tensão. Os dados obtidos foram convertidos para valores em grau celsius, KWh e Volts respectivamente e assim puderam ser validados. 
+
+    \subsection{Sensor de Temperatura }
+    
+    O sensor de temperatura LM35 é um sensor com saída analógica e com comportamento linear entre a tensão de saída e a temperatura medida. O sensor foi testado em uma das portas analógicas da Phidgets, conectando os pinos de VCC,GND E AN do sensor nos pinos correspondentes na Phidgets e o algoritmo de leitura de tensão foi utilizado para realizar a obtenção de dados. Para simular ambientes quentes e frios, foi medido o valor de tensão de saída para uma sala com ar-condicionado e após isto foi medido a temperatura assoprando o sensor. O valor da tensão de saída aumentou, como o sensor é linear e o valor de temperatura é o valor da tensao de saída multiplixado por 10, foi possível confirmar a coerência dos valores encontrados validando o funcionamento do sensor.
+    \subsection{GPS}
+    
+    O GPS foi testado a partir de um console disponibilizado no próprio site do fabricante. Foi necessário instalar esse console e conectar o GPS na USB do computador. A sua antena também foi acoplada. Como os dados do GPS só são confiáveis quando existem pelo menos 4 satélites conectados e a recepção na sala de teste era rui, no próprio console foi colocado o GPS no modo de simulação. A interface foi simples e assim que o console foi aberto foi colocada a taxa de dados de 15200 bauds. Após isso uma outra tela foi aberta informando os dados de latitude e longitude lidos. 
+    
+    \subsection{IMU}
+    
+    A IMU Xsens Mti-1 series possui um console chamado MtManagement e que é disponibilizado no próprio pen-drive de instalação que vem junto ao sensor. O console foi instalado e foi necessário apenas conectar a IMU a uma das portas USB do computador. Na própria interface gráfica já aparece as informações de orientação do dispositivo, informando a orientação nos três eixos de referência e velocidade angular. 
+    
+    \subsection{Phidgets}
+    
+    A phidgets é uma placa de interface com vários periféricos. Para testar as portas USBs presentes na placa foi conectado um pen drive na porta USB da Phidgets e a mesma foi conectada a uma porta USB do computador. O dispositivo foi acesso normalmente pelo computador indicando que a função da Phidgets de hub USB funcionou perfeitamente.
+    
+    Para obter dados das portas analógicas e digitais da phidgets é necessário o download e instação da biblioteca LibPhidget22 e do python module. Estes estão disponibilizados no próprio site da Phidgets com todas as intruções de instalação e exemplos de testes. Após a instalação da biblioteca foi o utilizado o exemplo de código VoltageInput.py e DigitalInput.py do site da Phidgets para se comunicar com os sensores conectados as portas. Ao compilar o código no terminal do computador foram adquiridos os dados dos sensores acoplhados a Phidgets indicando o funcionamento de suas portas.
+    
+    
+%--------- NEW SECTION ----------------------
+\section{Testes integrados}
+\label{sec:testi}
+asdfadsfsdfs
+
+%--------- NEW SECTION ----------------------
+\section{Avaliação da prontidão tecnológica}
+\label{sec:trl}
+asdfadsfsdfs
+
+%--------- NEW SECTION ----------------------
+\section{Trabalhos futuros}
+\label{sec:trabfut}
+asdfadsfsdfs
+
+
+
+
+
