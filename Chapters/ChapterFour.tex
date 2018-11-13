@@ -1,15 +1,27 @@
 \chapter{Resultados}
 \label{chap:result}
-asdfdsfdsf
+
+As funcionalidades do sistema de percepção foram validades a partir de duas etapas de teste. Os testes unitários buscam a validação do funcionamento de cada sensor individualmente enquanto os testes integrados validam o funcionamento dos sistemas e funcionalidades. A descição dos testes realizados e dos resultados obtidos por eles está descrita abaixo.
 
 %--------- NEW SECTION ----------------------
 \section{Testes unitários}
 \label{sec:testu}
 
-    \subsection{Câmera Infra-Vermelho}
+    \subsection{Câmera Térmica}
     
-    A câmera IR trabalha com comunicação SPI. Por isso, foi necessário um driver para converter os dados da câmera e disponibilizá-los em uma porta USB. Foi utilizada a placa de interface Nucleo STM32F401RE e o driver da câmera disponibilizado no site da mbed. A USB da placa foi conectada no computador e foi criado um código em python para printar as informações adquiridas na porta serial do computador e saber diferenciar os frames. 
+    A câmera térmica se comunica por VOSPI. Logo, foi necessário utilzar um driver para converter os dados da câmera e disponibilizá-los para USB. Foi utilizada a placa de interface Nucleo STM32F401RE com o driver disponibilizado por \citeonline{groupgets}. 
     
+    O driver apenas coleta os frames e envia para a USB seguindo o seguinte padrão de mensagem:
+    
+    \begin{figure}[!ht]
+    	\centering
+    	\includegraphics[width=14cm]{Figures/frame_msg.png}
+    	\caption{Mensagem do frame da câmera} \label{framemsg}
+	\end{figure}
+    
+    Na qual cada \textit{pixel}, dois \textit{bytes}, foi convertido para uma escala de cinza de 8-bit através de um algoritmo em python no computador, necessária para trabalhar com a biblioteca de processamento de imagens OpenCV.
+    
+    Após isso a imagem era reconstruida para verificar o funcionamento da câmera.
     
     \subsection{Sonar EZ-1}
     O sonar EZ-1 da MaxBotix possui saída analógica, desta forma para cada distância medida existe um valor de tensão associado no pino AN do sonar. Para testar o sensor de proximidade foi utilizada uma das portas analógicas da Phidgets que possui um pino de VCC, um de GND e um pino Analógico. Com o driver da phidgets instalado no computador e funcionando foi necessário apenas conectar os pinos de VCC, GND E AN do sensor nos pinos correspondentes da Phidgets e compilar um código para leitura de tensão - disponibilizado no próprio site da Phidgets - no terminal do computador. 
@@ -47,6 +59,43 @@ asdfdsfdsf
     
     Para obter dados das portas analógicas e digitais da phidgets é necessário o download e instação da biblioteca LibPhidget22 e do python module. Estes estão disponibilizados no próprio site da Phidgets com todas as intruções de instalação e exemplos de testes. Após a instalação da biblioteca foi o utilizado o exemplo de código VoltageInput.py e DigitalInput.py do site da Phidgets para se comunicar com os sensores conectados as portas. Ao compilar o código no terminal do computador foram adquiridos os dados dos sensores acoplhados a Phidgets indicando o funcionamento de suas portas.
     
+     \section{Integração no ROS}
+     
+     Após os testes unitários de cada sensor foi necessário o embarque no ambiente ROS para construção do sistem de Percepção. A descrição da metodologia empregada para embarcar cada um dos sensores no framework de robótica está mostrada nos tópicos abaixo.
+     \subsection{Phidgets}
+     A Phidgets por ser uma placa de interface concentra dispositivos que se comunicam de forma analógica e digital, por isso foi criado em ambiente ROS um nó responsável por coletar informações dos dispositivos conectados a Phidgets. O nó foi criado através de funções presentes na biblioteca da Phidgets e tendo como exemplo o algoritmo VoltaInput.py comentado anteriormente. 
+     
+     O nó foi construído utilizando a linguagem python e consiste em uma classe, cada dispositivo conectado a Phidgets corresponde a um objeto da classe criada onde são definidos a porta a qual o dispositivo está conectado, o tipo de comunicação (digital ou analógico), o nome do sensor e o nome do tópico a ser publicado as informações dos sensores. Após a criação dos objetos da classe é necessário chamar o método setup() de cada objeto para obter a tensão na porta dos sensores analógicos ou o estado da porta no caso dos sensores digitais. As informações são publicadas nos tópicos criados através de um método Publisher característico do ROS.
+     
+     Os sensores digitais conectados as portas da Phidgets foram os sensores de proximidade, enquanto que o sensor analógico conectado a Phidgets foi o sonar. O scrip desenvolvido como nó para  Phidgets está mostrado no Anexo XX.
+     
+     \subsection{Smart Charger}
+     
+     O script utilizado no teste unitário para receber os dados provenientes da smart charger no computador foi utilizado como base para a construção do nó no ambiente ROS. O script funciona enviando o caracter '0' via Serial o que faz a placa de interface Nucleo conectada a Smart Charger retornar todas as informações necessárias da bateria. No nó do ROS essas informações são recebidas via Serial, colocadas em um formato de mensagem chamado de Battery e publicadas em um tópico do ROS. O nó criado para a Smart charger está mostrado no anexo XX.
+     
+     \subsection{Câmera Térmica}
+     
+     A integração da câmera no ROS foi feita em duas etapas, que na prática foram representadas como dois nós:
+     
+     \begin{itemize}
+         \item O primeiro com objetivo da aquisição dos dados da câmera e sua disponibilização em um tópico.
+         \item O segundo nó é responsável por todo o tratamento da imagem e detecção dos pontos quentes.
+     \end{itemize}
+     
+     Para a aquisição dos dados, no primeiro nó, foi utilizado basicamente o mesmo algoritmo que no teste unitário, porém com a integração das bibliotecas do ROS.
+     
+     No segundo nó foi utilizado a biblioteca OpenCV para realizar o processamento da imagem. Primeiramente, o frame disponibilizado pelo nó de aquisição é adquirido subscrevendo do seu respectivo tópico. Para retirar o aspecto "pixelado" da imagem da câmera, devido a sua baixa resolução (80x60 pixeis), foi necessário realizar uma interpolação cúbica para redimensionar a imagem para uma resolução de (400x300 pixeis), obtendo assim uma imagem mais detalhada. 
+     
+     Com a imagem já redimensionada, é aplicado um filtro \textit{blur} para eliminar altas frequências que podem interferir na binarização (\textit{thresholding}) que será feita na imagem.
+     
+     Após o filtro, o frame é binarizado com o objetivo de facilitar a identificação dos pontos quentes através de um algoritmo de busca de contornos.
+     
+     \subsection{GPS}
+     
+     Foi utilizado um driver disponibilizado no GitHub com licença livre para embarcar o GPS no ambiente ROS. O driver pertence a xxxx. 
+     
+     \subsection{IMU}
+    Foi utilizado o driver da IMU disponibilizada pela própria fabricante Xsens para embarcar a IMU no ROS. O driver de licença livre é disponibilizado no github da própria empresa. 
     
 %--------- NEW SECTION ----------------------
 %\section{Testes integrados}

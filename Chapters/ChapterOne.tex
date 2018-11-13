@@ -1,12 +1,27 @@
 \chapter{Introdução}
 \label{chap:intro}
 
-\citeonline{mamede2005} diz que as linhas de transmissão são elementos de um sistema elétrico que transportam a energia produzida pelas fontes de geração até as subestações abaixadoras instaladas próximas aos grandes centros de carga. Como as fontes de geração
+Segundo \citeonline{mamede2005}, as linhas de transmissão (LT) são elementos de um sistema elétrico que transportam a energia produzida pelas fontes de geração até as subestações abaixadoras instaladas próximas aos grandes centros de carga. Como as fontes de geração
 de energia são construídas longes dos centros consumidores é preciso de linhas de transmissão de grandes extensões, o que as tornam susceptíveis às incidências de defeitos.
 
-Um dos maiores problemas na distribuição de energia é o aquecimento anormal associado à alta resistência ou fluxo de corrente excessiva, onde alguns dos componentes afetados são o transformador trifásico, switches, conetores, fusíveis, cabos, etc \cite{canahuire}.
+Um dos maiores problemas na distribuição de energia é o aquecimento anormal associado à alta resistência ou fluxo de corrente excessiva, onde alguns dos componentes afetados são o transformador trifásico, switches, conetores, fusíveis, cabos, etc \cite{canahuire}. Outro problema comum é a proximidade de objetos não desejados dos cabos de alta tensão, que podem acarretar em curtos no sistema elétrico de potência.
 
-Para detectar esses problemas, é necessário a utilização de câmeras térmicas para estimação da temperatura dos componentes. 
+No Brasil, existe uma quantidade considerável de linhas de transmissão de alta tensão que já ultrapassaram a vida útil das quais foram destinadas. Com a degradação dos componentes nela instalados, vê-se a necessidade de manutenções preditivas a fim de verificar a integridade do sistema.
+
+A técnica comumente utilizada para inspeção de linhas de transmissão é a termografia, capaz de identificar o aumento de temperatura nos cabos e equipamentos.  A inspeção por câmera térmica é de suma importância para a integridade dos equipamentos, já que por sua vez podem identificar possíveis problemas. Vale ressaltar que é necessário verificar as condições locais onde as torres estão instaladas, visto que construções e vegetação necessitam de uma distância mínima da mesma. 
+
+Atualmente, a inspeção de linhas de transmissão é feita através de aeronaves tripuladas e uma equipe especializada. Essas inspeções são relativamente custosas e não possuem uma boa eficiência. Os helicópteros precisam sobrevoar próximos a LT para que um operado para realizar o procedimento, como pode ser vista na figura \ref{lineinspection}.
+
+\pagebreak
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=10cm]{Figures/lineinpection.jpg}
+	\caption{Inspeção de uma linha de transmissão} \label{lineinspection}
+\end{figure}
+
+Neste trabalho de conclusão de curso (TCC), seguindo a metodologia TheoPrax, é proposto o desenvolvimento da percepção de um robô móvel para inspeção de linhas de transmissão ELIR (Electrical Inspection Robot). O robô se irá se deslocar ao longo do cabo de alta tensão em busca de pontos quentes utilizando uma câmera térmica e verificando se há objetos próximos dos cabos com um sonar. Esses dados serão armazenados com a adição das coordenadas do robô fornecidas por um GPS e horário da detecção. O sistema irá conter outros sensores para compor toda a sua funcionalidade e serão abordados em mais detalhes nesse relatório.
+
 
 %--------- NEW SECTION ----------------------
 \section{Objetivos}
